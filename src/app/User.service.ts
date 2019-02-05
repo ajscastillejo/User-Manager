@@ -9,7 +9,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class UserService {
 
-  private _url: string = "/assets/data/users.json";
+  private _url: string = "https://reqres.in/api/users";
 
   constructor(private http:HttpClient) { }
 
