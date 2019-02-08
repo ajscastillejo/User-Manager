@@ -9,14 +9,14 @@ export class LoggerService {
 
   constructor() { }
 
-  setFileName(fileName:string){
+  setFileName(fileName: string) {
     this.fileName = fileName;
   }
 
-  log(...msg: any[]){
-    let fechaFormateada = new Date();
+  log(...msg: any[]) {
+    const fechaFormateada = new Date();
 
 
-    console.log(`[${fechaFormateada}]  ${this.fileName}: ${msg[0]} `, msg[1] == undefined ? '' : msg[1] );
+    console.log(`[${fechaFormateada}]  ${this.fileName}: ${msg[0]} `, msg[1] === undefined ? '' : msg[1] );
   }
 }

@@ -1,6 +1,17 @@
-<ul>
-  <li *ngFor="let usuario of usuarios">
-    {{usuario.id}}. <img src="{{usuario.avatar}}" alt="avatar">  {{usuario.first_name}} {{usuario.last_name}}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <ul>
 
-  </li>
-</ul>
+    <div *ngFor= "let usuario of usuarios">
+      {{usuario.id}}. <img src="{{usuario.avatar}}" alt="avatar">  {{usuario.firstName}} {{usuario.lastName}} <br><br>
+
+    </div>
+  </ul>
+  <button (click)="onClick()">hola</button>
+
+</body>
+</html>

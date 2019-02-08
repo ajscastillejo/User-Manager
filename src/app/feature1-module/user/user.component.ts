@@ -13,7 +13,7 @@ import { interval } from 'rxjs';
   styleUrls: []
 })
 export class UserComponent implements OnInit {
-  private usuarios: Array<User>;
+  public usuarios: Array<User>;
   private responseLocal: Response;
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
@@ -21,14 +21,18 @@ export class UserComponent implements OnInit {
     log.log('Iniciado!!');
   }
 
+  onClick() {
+    this.remoteDataService.getUserData(contador);
+  }
   ngOnInit() {
     this.remoteDataService.getUserData().subscribe(response => {
       this.responseLocal = response;
       this.usuarios = this.responseLocal.data;
     },
     error => {
-      this.log.log('Ocurrió un fallo!!!!!',error);
+      this.log.log('Ocurrió un fallo!!!!!', error);
     });
+
 
     // this.enviarData();
 

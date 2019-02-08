@@ -3,9 +3,9 @@ import { User } from './User';
 
 export class Response {
   page: number;
-  per_page: number;
+  perPage: number;
   total: number;
-  total_pages: number;
+  totalPages: number;
   data: Array<User>;
 
 }
