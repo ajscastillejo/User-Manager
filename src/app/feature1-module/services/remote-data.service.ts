@@ -16,7 +16,7 @@ export class RemoteDataService {
 
   private URL = 'https://reqres.in/api/users?page=';
 
-  getUserData(private contador:integer) {
+  getUserData(contador: number) {
     this.log.log('Iniciando petición http');
     return this.httpClient.get<Response>(this.URL + contador);
   }

@@ -15,7 +15,7 @@ import { interval } from 'rxjs';
 export class UserComponent implements OnInit {
   public usuarios: Array<User>;
   private responseLocal: Response;
-  private contador: integer;
+  private contador: number;
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
     log.setFileName('user.component.ts');
@@ -23,8 +23,8 @@ export class UserComponent implements OnInit {
   }
 
   onClick() {
-    contador++;
-    this.remoteDataService.getUserData(contador).subscribe(response => {
+    this.contador++;
+    this.remoteDataService.getUserData(this.contador).subscribe(response => {
       this.responseLocal = response;
       this.usuarios = this.responseLocal.data;
     },
@@ -43,42 +43,6 @@ export class UserComponent implements OnInit {
     });
 
 }
-
-
-    // this.enviarData();
-
-    // this.pruebaObservable();
   }
 
-  // pruebaObservable(){
-  //   const seconds = interval(1000);
-  //   let time: string;
-  //   seconds.subscribe(n => {
-  //     time = `Pasando ${n} segundos desde la suscripción`;
-  //     //this.log.log(time);
-  //   });
-
-
-  // }
-
-  // enviarData(){
-  //   let u = new User(undefined, 'Jose Julian', 'Ariza', 'https://prometheus.io/assets/prometheus_logo_grey.svg');
-  //   this.remoteDataService.setRemoteData(u).subscribe(response => {
-  //     this.log.log('respuesta post: ',response);
-  //   },
-  //   error => {
-  //     this.log.log('Ocurrió un al hacer el post!!!!!', error);
-  //   });
-  // }
-
-
-  // ngDoCheck(){
-    /*
-    if (this.responseLocal !== undefined && this.responseLocal.data !== undefined){
-      this.log.log('Tengo data!!!!');
-    } else {
-      this.log.log('Aun no llega data');
-    }
-    */
-  }
-
+   // }
