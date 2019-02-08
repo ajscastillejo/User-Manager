@@ -15,6 +15,7 @@ import { interval } from 'rxjs';
 export class UserComponent implements OnInit {
   public usuarios: Array<User>;
   private responseLocal: Response;
+  private contador: integer;
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
     log.setFileName('user.component.ts');
@@ -22,16 +23,26 @@ export class UserComponent implements OnInit {
   }
 
   onClick() {
-    this.remoteDataService.getUserData(contador);
-  }
-  ngOnInit() {
-    this.remoteDataService.getUserData().subscribe(response => {
+    contador++;
+    this.remoteDataService.getUserData(contador).subscribe(response => {
       this.responseLocal = response;
       this.usuarios = this.responseLocal.data;
     },
     error => {
       this.log.log('Ocurrió un fallo!!!!!', error);
     });
+  }
+
+  ngOnInit() {
+    this.remoteDataService.getUserData(1).subscribe(response => {
+      this.responseLocal = response;
+      this.usuarios = this.responseLocal.data;
+    },
+    error => {
+      this.log.log('Ocurrió un fallo!!!!!', error);
+    });
+
+}
 
 
     // this.enviarData();
