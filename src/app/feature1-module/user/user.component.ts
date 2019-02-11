@@ -22,9 +22,14 @@ export class UserComponent implements OnInit {
     log.log('Iniciado!!');
   }
 
-  onClick() {
-    this.contador++;
+  onClick(avanzar) {
+    if (avanzar === true) {
+      this.contador++;
+    } else if (avanzar === false) {
+      this.contador--;
+    }
     this.remoteDataService.getUserData(this.contador).subscribe(response => {
+      console.log(this.responseLocal);
       this.responseLocal = response;
       this.usuarios = this.responseLocal.data;
     },
@@ -45,4 +50,3 @@ export class UserComponent implements OnInit {
 }
   }
 
-   // }
