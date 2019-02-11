@@ -22,10 +22,10 @@ export class UserComponent implements OnInit {
     log.log('Iniciado!!');
   }
 
-  onClick(avanzar) {
-    if (avanzar === true) {
+  onClick(avanzar: boolean) {
+    if (avanzar) {
       this.contador++;
-    } else if (avanzar === false) {
+    } else  {
       this.contador--;
     }
     this.remoteDataService.getUserData(this.contador).subscribe(response => {
