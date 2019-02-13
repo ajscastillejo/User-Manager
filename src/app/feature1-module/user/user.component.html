@@ -5,14 +5,33 @@
 </head>
 <body>
   <ul>
-
+    <table style="width:100%">
     <div *ngFor= "let usuario of usuarios">
-      {{usuario.id}}. <img src="{{usuario.avatar}}" alt="avatar">  {{usuario.firstName}} {{usuario.lastName}} <br><br>
+   <tr> <img style="border-radius: 50%" src="{{usuario.avatar}}" alt="avatar">   <tr>
+   <b> {{usuario.id}}. {{usuario.first_name}} {{usuario.last_name}} </b>   <br><br>
+     </tr>
 
     </div>
+    </table>
   </ul>
-  <button (click)="onClick(true)">Avanzar</button>
-  <button (click)="onClick(false)">Retroceder</button>
-
+  <button
+  [disabled]="buttonDisabled1"
+  style="color:rgb(0, 132, 255)"
+  (click)="onClick(false)">
+  Retroceder
+</button>
+  <button
+  [disabled]="buttonDisabled2"
+  style="color:rgb(109, 196, 23)"
+  (click)="onClick(true)">
+  Avanzar
+</button>
+<select (change)="onSelect($event.target.value)">
+  <option *ngFor="let Opcion of Opciones"
+    [value]="Opcion.id">
+    {{Opcion.name}}
+  </option>
+</select>
+ <!-- <div>selection={{selectedOpcion.name}}</div> -->
 </body>
 </html>

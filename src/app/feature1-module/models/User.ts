@@ -1,13 +1,13 @@
 export class User {
   public id: number;
-  public firstName: string;
-  public lastName: string;
+  public first_name: string;
+  public last_name: string;
   public avatar: string;
 
   constructor(id?: number, firstName?: string, lastName?: string, avatar?: string) {
     this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.first_name = firstName;
+    this.last_name = lastName;
     this.avatar = avatar;
   }
 
