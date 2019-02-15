@@ -4,7 +4,15 @@
   <meta charset="utf-8" />
 </head>
 <body>
-  <ul>
+  <select (change)="onSelect($event.target.value)">
+      <option *ngFor="let Opcion of Opciones"
+        [defaultSelected]="1"
+        [value]="Opcion.id">
+        {{Opcion.name}}
+      </option>
+
+      </select>
+      <ul>
     <table style="width:100%">
     <div *ngFor= "let usuario of usuarios">
    <tr> <img style="border-radius: 50%" src="{{usuario.avatar}}" alt="avatar">   <tr>
@@ -26,12 +34,6 @@
   (click)="onClick(true)">
   Avanzar
 </button>
-<select (change)="onSelect($event.target.value)">
-  <option *ngFor="let Opcion of Opciones"
-    [value]="Opcion.id">
-    {{Opcion.name}}
-  </option>
-</select>
  <!-- <div>selection={{selectedOpcion.name}}</div> -->
 </body>
 </html>
