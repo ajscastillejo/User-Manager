@@ -17,7 +17,7 @@ import { Button } from 'protractor';
 export class UserComponent implements OnInit {
   private responseLocal: Response;
   private contador = 1;
-  private elementosporpagina = 5;
+  private elementosporpagina = 1;
   public buttonDisabled1 = true;
   public buttonDisabled2 = false;
   public usuarios: Array<User>;
@@ -26,8 +26,6 @@ export class UserComponent implements OnInit {
     { id: 5, name: '5 Elementos por página' },
     { id: 10, name: '10 Elementos por página' }
   ];
-
-  public selectedOpcion: Opcion = this.opciones[1];
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
     log.setFileName('user.component.ts');
@@ -46,12 +44,6 @@ export class UserComponent implements OnInit {
   }
 
   onSelect(opcionId) {
-    for (const op of this.opciones) {
-      if (op.id === opcionId) {
-        this.selectedOpcion = op;
-        break;
-      }
-    }
     console.log(opcionId);
     this.elementosporpagina = opcionId;
     this.llamadaRemota();
@@ -76,6 +68,7 @@ export class UserComponent implements OnInit {
   }
 
   llamadaRemota() {
+    console.log(`contador: ${this.contador} y elementos: ${this.elementosporpagina}`);
     this.remoteDataService.getUserData(this.contador, this.elementosporpagina).subscribe(response => {
       console.log(this.responseLocal);
       this.responseLocal = response;
