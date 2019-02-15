@@ -5,17 +5,17 @@
 </head>
 <body>
   <select (change)="onSelect($event.target.value)">
-      <option *ngFor="let Opcion of Opciones"
+      <option *ngFor="let op of opciones"
         [defaultSelected]="1"
-        [value]="Opcion.id">
-        {{Opcion.name}}
+        [value]="op.id">
+        {{op.name}}
       </option>
 
-      </select>
-      <ul>
+  </select>
+  <ul>
     <table style="width:100%">
     <div *ngFor= "let usuario of usuarios">
-   <tr> <img style="border-radius: 50%" src="{{usuario.avatar}}" alt="avatar">   <tr>
+    <tr> <img style="border-radius: 50%" src="{{usuario.avatar}}" alt="avatar">   <tr>
    <b> {{usuario.id}}. {{usuario.first_name}} {{usuario.last_name}} </b>   <br><br>
      </tr>
 
