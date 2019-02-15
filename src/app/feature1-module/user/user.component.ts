@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
     { id: 10, name: '10 Elementos por página' }
   ];
   public selectedOpcion: Opcion = this.Opciones[1];
-  onSelect(OpcionId = this.elementosporpagina) {
+  onSelect(OpcionId) {
       // this.selectedOpcion = null;
       for (let i = 0; i < this.Opciones.length; i++)
       {
@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
         }
       }
       console.log(OpcionId);
+      this.elementosporpagina = OpcionId;
   }
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
