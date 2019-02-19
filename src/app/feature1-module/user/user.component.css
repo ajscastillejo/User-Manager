@@ -1,3 +1,28 @@
 .userimage {
-  border-radius: 20%;
+  border-radius: 50%;
   }
+.table {
+  margin-top: 50px
+}
+button {
+  margin-top: 50px;
+}
+.btn-outline-primary {
+margin-left: 650px;
+}
+.btn-outline-success {
+  margin-left: 50px;
+}
+.firstname {
+
+}
+.addimg {
+  margin-left: 15px;
+  width: 50px;
+  height: 50px;
+}
+.editimg {
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
+}

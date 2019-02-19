@@ -2,33 +2,46 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
   <select (change)="onSelect($event.target.value)">
       <option *ngFor="let op of opciones" [value]="op.id">{{op.name}}</option>
   </select>
 
-  <ul>
-    <table style="width:100%">
-    <tr *ngFor= "let us of usuarios">
-        {{us.id}}. <img style="border-radius: 50%" src="{{us.avatar}}" alt="avatar">
-      <b>  {{us.first_name}} {{us.last_name}} </b>   <br><br>
-     </tr>
-
-    </table>
-  </ul>
+      <table class="table"  class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Photo</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor= "let us of usuarios">
+            <th scope="row">{{us.id}}</th>
+            <td>
+                <img class="userimage" src="{{us.avatar}}" alt="avatar">
+            </td>
+            <td class="firstname">{{us.first_name}}</td>
+            <td class="lastname">{{us.last_name}}</td>
+            <td class="lastname"><img class="addimg" src="../../../assets/img/add.png"> <img class="addimg" src="../../../assets/img/delete.png"> <img class="editimg" src="../../../assets/img/edit.png"></td>
+          </tr>
+          </tbody>
+        </table>
   <button
+  class="btn btn-outline-primary"
   [disabled]="buttonDisabled1"
-  style="color:rgb(0, 132, 255)"
   (click)="onClick(false)">
   Retroceder
 </button>
   <button
+  class="btn btn-outline-success"
   [disabled]="buttonDisabled2"
-  style="color:rgb(109, 196, 23)"
   (click)="onClick(true)">
   Avanzar
 </button>
- <!-- <div>selection={{selectedOpcion.name}}</div> -->
 </body>
 </html>

@@ -4,7 +4,6 @@ import { RemoteDataService } from '../services/remote-data.service';
 import { Response } from '../models/response';
 import { User } from '../models/User';
 import { Opcion } from '../models/Opcion';
-// import {usercomponentcss} from './user.component.css'
 
 import { interval } from 'rxjs';
 import { Button } from 'protractor';
@@ -12,7 +11,7 @@ import { Button } from 'protractor';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: []
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
   private responseLocal: Response;
@@ -23,8 +22,8 @@ export class UserComponent implements OnInit {
   public usuarios: Array<User>;
   public opciones: Opcion[] = [
     { id: 1, name: '1 Elemento por página' },
-    { id: 5, name: '5 Elementos por página' },
-    { id: 10, name: '10 Elementos por página' }
+    { id: 3, name: '3 Elementos por página' },
+    { id: 6, name: '6 Elementos por página' }
   ];
 
   constructor(private log: LoggerService,  private remoteDataService: RemoteDataService) {
@@ -53,15 +52,18 @@ export class UserComponent implements OnInit {
   onClick(avanzar: boolean) {
     if (avanzar) {
       this.contador++;
-    } else  {
+    } else {
       this.contador--;
     }
     if (this.contador === 1) {
       this.buttonDisabled1 = true;
-      this.buttonDisabled2 = true;
+      this.buttonDisabled2 = false;
     } else {
       this.buttonDisabled1 = false;
       this.buttonDisabled2 = false;
+    }
+    if (this.responseLocal.total / this.elementosporpagina === this.contador) {
+      this.buttonDisabled2 = true;
     }
 
     this.llamadaRemota();
