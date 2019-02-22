@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -23,11 +23,51 @@
               <tr *ngFor= "let us of usuarios">
             <th scope="row">{{us.id}}</th>
             <td>
-                <img class="userimage" src="{{us.avatar}}" alt="avatar">
+                <img class="userimage" src="{{us?.avatar}}" alt="avatar">
             </td>
-            <td class="firstname">{{us.first_name}}</td>
-            <td class="lastname">{{us.last_name}}</td>
-            <td class="lastname"><img class="addimg" src="../../../assets/img/add.png"> <img class="addimg" src="../../../assets/img/delete.png"> <img class="editimg" src="../../../assets/img/edit.png"></td>
+            <td class="firstname">{{us?.first_name}}</td>
+            <td class="lastname">{{us?.last_name}}</td>
+            <td class="lastname">
+              <input
+              onclick= "myFunction()"
+              type="image" src="../../../assets/img/add.png"
+              name="saveForm" class="addimg" id="saveForm"/>
+              <div id="myDIV">
+                  <form action="ejemplo.php" method="get">
+                      <form novalidate [formGroup]="user">
+                          <label>
+                            <span>First name :  </span>
+                            <input
+                              type="text"
+                              placeholder="adrian"
+                              formControlName="firstname">
+                          </label> <br>
+                          <label>
+                              <span>Last Name : </span>
+                              <input
+                                placeholder="gomez"
+                                formControlName="lastname">
+                            </label> <br>
+                            <label>
+                              <span>Url :  </span>
+                              <input
+                                placeholder="car.png"
+                                formControlName="url">
+                            </label>
+                        </form>
+                            <button (click)="clickFormulario()" type="submit" [disabled]="user.invalid">Sign up</button>
+                          </form>
+               </div>
+              <input
+              (click)="borrar(us.id)"
+              type="image" src="../../../assets/img/delete.png"
+              name="saveForm" class="addimg"
+              id="saveForm"/>
+              <input
+              type="image"
+              src="../../../assets/img/edit.png"
+              name="saveForm" class="editimg" id="saveForm" />
+            </td>
           </tr>
           </tbody>
         </table>
@@ -43,5 +83,16 @@
   (click)="onClick(true)">
   Avanzar
 </button>
+<script>
+    function myFunction() {
+      var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+    }
+    </script>
+
 </body>
 </html>
