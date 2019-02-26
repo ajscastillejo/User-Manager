@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { LoggerService } from './logger.service';
 import { Response } from '../models/response';
 import { User } from '../models/User';
-import { formulario } from '../models/formulario';
 
 
 
@@ -27,9 +26,14 @@ export class RemoteDataService {
     console.log(id);
     return this.httpClient.delete<Response>(this.URL + id);
   }
-  createUserData(formulario) {
+  createUserData(User, id) {
     this.log.log('Iniciando petición http');
     // console.log(id);
-    return this.httpClient.post<Response>(this.URL, formulario);
+    return this.httpClient.post<Response>(this.URL + id, User);
+  }
+  editUserData(id) {
+    this.log.log('Iniciando petición http');
+    // console.log(id);
+    return this.httpClient.put<Response>(this.URL + id , User);
   }
 }

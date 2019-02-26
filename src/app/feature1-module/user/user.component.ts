@@ -5,7 +5,7 @@ import { Response } from '../models/response';
 import { User } from '../models/User';
 import { Opcion } from '../models/Opcion';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import {formulario} from '../models/formulario';
+import { NotifierService } from 'angular-notifier';
 
 
 import { interval } from 'rxjs';
@@ -19,6 +19,7 @@ import { Button } from 'protractor';
 })
 export class UserComponent implements OnInit {
   user: FormGroup;
+  private notifier: NotifierService;
   private responseLocal: Response;
   private contador = 1;
   private elementosporpagina = 1;
@@ -30,11 +31,40 @@ export class UserComponent implements OnInit {
     { id: 3, name: '3 Elementos por página' },
     { id: 6, name: '6 Elementos por página' }
   ];
+  public showNotification( type: string, message: string ): void {
+    this.notifier.notify( type, message );
+  }
 
-  constructor(private log: LoggerService,  private remoteDataService: RemoteDataService, private fb: FormBuilder) {
+  public hideOldestNotification(): void {
+    this.notifier.hideOldest();
+  }
+
+  public hideNewestNotification(): void {
+    this.notifier.hideNewest();
+  }
+
+  public hideAllNotifications(): void {
+    this.notifier.hideAll();
+  }
+
+  public showSpecificNotification( type: string, message: string, id: string ): void {
+    this.notifier.show( {
+      id,
+      message,
+      type
+    } );
+  }
+
+  public hideSpecificNotification( id: string ): void {
+    this.notifier.hide( id );
+  }
+
+  constructor(private log: LoggerService,  private remoteDataService: RemoteDataService, private fb: FormBuilder, notifier: NotifierService) {
     log.setFileName('user.component.ts');
     log.log('Iniciado!!');
+    this.notifier = notifier;
   }
+
 
   ngOnInit() {
     this.user = this.fb.group({
@@ -66,9 +96,9 @@ export class UserComponent implements OnInit {
 
   }
 
-  clickFormulario (formulario) {
+  clickFormulario (User, id) {
   //  formulario,
-  this.remoteDataService.createUserData(formulario).subscribe(response => {
+  this.remoteDataService.createUserData(id, User).subscribe(response => {
   console.log(response);
   this.responseLocal = response;
   this.usuarios = this.responseLocal.data;
@@ -97,7 +127,22 @@ error => {
     this.llamadaRemota();
   }
 
-
+toggleFunction() {
+    let x = document.getElementById('myDIV');
+    if (x.style.display === 'none') {
+  x.style.display = 'block';
+} else {
+  x.style.display = 'none';
+}
+  }
+  toggleFunction2() {
+    let x = document.getElementById('myDIV2');
+    if (x.style.display === 'none') {
+  x.style.display = 'block';
+} else {
+  x.style.display = 'none';
+}
+  }
 
   borrar(id: number) {
     console.log(id);
@@ -122,5 +167,7 @@ error => {
       this.log.log('Ocurrió un fallo!!!!!', error);
     });
   }
+
+
 
 }
