@@ -6,7 +6,6 @@ import { User } from '../models/User';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +13,7 @@ export class RemoteDataService {
 
   constructor(private httpClient: HttpClient, private log: LoggerService) { this.log.setFileName('remote-data.service.ts'); }
 
-  private URL = 'https://reqres.in/api/users';
+  private URL = 'http://localhost:3000/users';
 
   getUserData(contador: number, cantidad: number) {
     this.log.log('Iniciando petición http');
@@ -24,16 +23,16 @@ export class RemoteDataService {
   removeUserData(id: number) {
     this.log.log('Iniciando petición http');
     console.log(id);
-    return this.httpClient.delete<Response>(this.URL + id);
+    return this.httpClient.delete<Response>(this.URL + '/' + id);
   }
   createUserData(User, id) {
     this.log.log('Iniciando petición http');
     // console.log(id);
-    return this.httpClient.post<Response>(this.URL + id, User);
+    return this.httpClient.post<Response>(this.URL + '/' + id, User);
   }
   editUserData(id) {
     this.log.log('Iniciando petición http');
     // console.log(id);
-    return this.httpClient.put<Response>(this.URL + id , User);
+    return this.httpClient.put<Response>(this.URL + '/' + id , User);
   }
 }

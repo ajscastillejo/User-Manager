@@ -121,7 +121,7 @@ error => {
       this.buttonDisabled1 = false;
       this.buttonDisabled2 = false;
     }
-    if (this.responseLocal.total / this.elementosporpagina === this.contador) {
+    if (this.responseLocal.total/ this.elementosporpagina === this.contador) {
       this.buttonDisabled2 = true;
     }
     this.llamadaRemota();
