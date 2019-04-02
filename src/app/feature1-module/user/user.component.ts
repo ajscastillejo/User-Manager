@@ -1,15 +1,21 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Button } from 'protractor';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { ConsoleReporter } from 'jasmine';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+  } from '@angular/forms';
+import { interval } from 'rxjs';
 import { LoggerService } from '../services/logger.service';
+import { NotifierService } from 'angular-notifier';
+import { Opcion } from '../models/Opcion';
 import { RemoteDataService } from '../services/remote-data.service';
 import { Response } from '../models/response';
 import { User } from '../models/User';
-import { Opcion } from '../models/Opcion';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { NotifierService } from 'angular-notifier';
 
 
-import { interval } from 'rxjs';
-import { Button } from 'protractor';
 
 @Component({
   selector: 'app-user',
@@ -96,9 +102,9 @@ export class UserComponent implements OnInit {
 
   }
 
-  clickFormulario (User, id) {
+  clickFormulario(user: User, id) {
   //  formulario,
-  this.remoteDataService.createUserData(id, User).subscribe(response => {
+  this.remoteDataService.createUserData(id, user).subscribe(response => {
   console.log(response);
   this.responseLocal = response;
   this.usuarios = this.responseLocal.data;
@@ -121,14 +127,14 @@ error => {
       this.buttonDisabled1 = false;
       this.buttonDisabled2 = false;
     }
-    if (this.responseLocal.total/ this.elementosporpagina === this.contador) {
+    if (this.responseLocal.total / this.elementosporpagina === this.contador) {
       this.buttonDisabled2 = true;
     }
     this.llamadaRemota();
   }
 
 toggleFunction() {
-    let x = document.getElementById('myDIV');
+    const x = document.getElementById('myDIV');
     if (x.style.display === 'none') {
   x.style.display = 'block';
 } else {
@@ -136,7 +142,7 @@ toggleFunction() {
 }
   }
   toggleFunction2() {
-    let x = document.getElementById('myDIV2');
+    const x = document.getElementById('myDIV2');
     if (x.style.display === 'none') {
   x.style.display = 'block';
 } else {

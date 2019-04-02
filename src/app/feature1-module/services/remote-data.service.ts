@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { LoggerService } from './logger.service';
 import { Response } from '../models/response';
 import { User } from '../models/User';
@@ -25,10 +25,10 @@ export class RemoteDataService {
     console.log(id);
     return this.httpClient.delete<Response>(this.URL + '/' + id);
   }
-  createUserData(User, id) {
+  createUserData(user: User, id) {
     this.log.log('Iniciando petición http');
     // console.log(id);
-    return this.httpClient.post<Response>(this.URL + '/' + id, User);
+    return this.httpClient.post<Response>(this.URL + '/' + id, user);
   }
   editUserData(id) {
     this.log.log('Iniciando petición http');
