@@ -1,119 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
+
 <body>
   <select (change)="onSelect($event.target.value)">
-      <option *ngFor="let op of opciones" [value]="op.id">{{op.name}}</option>
+    <option *ngFor="let op of opciones" [value]="op.id">{{op.name}}</option>
   </select>
 
-      <table class="table"  class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Photo</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor= "let us of usuarios">
-            <th scope="row">{{us.id}}</th>
-            <td>
-                <img class="userimage" src="{{us?.avatar}}" alt="avatar">
-            </td>
-            <td class="firstname">{{us?.first_name}}</td>
-            <td class="lastname">{{us?.last_name}}</td>
-            <td class="lastname">
-              <input
+  <table class="table" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Photo</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let us of usuarios">
+        <th scope="row">{{us.id}}</th>
+        <td>
+          <img class="userimage" src="{{us?.avatar}}" alt="avatar">
+        </td>
+        <td class="firstname">{{us?.first_name}}</td>
+        <td class="lastname">{{us?.last_name}}</td>
+        <td class="lastname">
+          <input (click)="toggleFunction(us?.id)" type="image" src="../../../assets/img/add.png" name="saveForm"
+            class="addimg" id={{us.id}} />
+          <div id="myDIV">
 
-              (click)="toggleFunction(us?.id)"
-              type="image" src="../../../assets/img/add.png"
-              name="saveForm" class="addimg" id={{us.id}}/>
-              <div id="myDIV">
-                      <form novalidate [formGroup]="user">
-                          <label>
-                            <span>First name :  </span>
-                            <input
-                              type="text"
-                              placeholder="adrian"
-                              formControlName="firstname">
-                          </label> <br>
-                          <label>
-                              <span>Last Name : </span>
-                              <input
-                                placeholder="gomez"
-                                formControlName="lastname">
-                            </label> <br>
-                            <label>
-                              <span>Url :  </span>
-                              <input
-                                placeholder="car.png"
-                                formControlName="url">
-                            </label>
-                        </form>
-                            <button (click)="showNotification( 'success', 'Usuario creado correctamente.' )" (click)="clickFormulario()" type="submit" [disabled]="user.invalid">Create</button>
-               </div>
-               <input
-               (click)="showNotification( 'error', 'Usuario borrado correctamente.' )"
-               (click)="borrar(us.id)"
-               type="image" src="../../../assets/img/delete.png"
-               name="saveForm" class="addimg"
-               id="saveForm"/>
-               <input
-              (click)="toggleFunction2()"
-              type="image" src="../../../assets/img/edit.png"
-              name="saveForm" class="addimg" id="saveForm"/>
-              <div id="myDIV2">
-                  <form action="ejemplo.php" method="get">
-                      <form novalidate [formGroup]="user">
-                          <label>
-                            <span>First name :  </span>
-                            <input
-                              type="text"
-                              value="{{us?.first_name}}"
-                              formControlName="firstname">
-                          </label> <br>
-                          <label>
-                              <span>Last Name : </span>
-                              <input
-                                value="{{us?.last_name}}"
-                                formControlName="lastname">
-                            </label> <br>
-                            <label>
-                              <span>Url :  </span>
-                              <input
-                                value="{{us?.avatar}}"
-                                formControlName="url">
-                            </label>
-                        </form>
-                            <button (click)="showNotification( 'info', 'Usuario editado correctamente.' )" (click)="clickFormulario()" >Edit</button>
-                          </form>
-               </div>
-              <!-- <input
+
+
+            <form id="form" [formGroup]="user" (ngSubmit)="clickFormulario()">
+
+              <input placeholder="Primer Nombre" maxlength="10" formControlName="first_name" required> <br>
+              <input placeholder="Apellido" maxlength="10" formControlName="last_name" required> <br>
+              <input placeholder="Avatar" formControlName="avatar" required> <br>
+
+              <button type="submit" [disabled]="user.invalid">Create</button>
+
+            </form>
+
+
+          </div>
+          <input (click)="showNotification( 'error', 'Usuario borrado correctamente.' )" (click)="borrar(us.id)"
+            type="image" src="../../../assets/img/delete.png" name="saveForm" class="addimg" id="saveForm" />
+          <input (click)="toggleFunction2()" type="image" src="../../../assets/img/edit.png" name="saveForm"
+            class="addimg" id="saveForm" />
+          <div id="myDIV2">
+            <form action="ejemplo.php" method="get">
+              <form novalidate [formGroup]="user">
+                <label>
+                  <span>First name : </span>
+                  <input type="text" value="{{us?.first_name}}" formControlName="first_name">
+                </label> <br>
+                <label>
+                  <span>Last Name : </span>
+                  <input value="{{us?.last_name}}" formControlName="last_name">
+                </label> <br>
+                <label>
+                  <span>Url : </span>
+                  <input value="{{us?.avatar}}" formControlName="avatar">
+                </label>
+              </form>
+              <button (click)="showNotification( 'info', 'Usuario editado correctamente.' )"
+                (click)="clickFormulario()">Edit</button>
+            </form>
+          </div>
+          <!-- <input
               type="image"
               src="../../../assets/img/edit.png"
               name="saveForm" class="editimg" id="saveForm" /> -->
-            </td>
-          </tr>
-          </tbody>
-        </table>
-  <button
-  class="btn btn-outline-primary"
-  [disabled]="buttonDisabled1"
-  (click)="onClick(false)">
-  Retroceder
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-outline-primary" [disabled]="buttonDisabled1" (click)="onClick(false)">
+    Retroceder
   </button>
-  <button
-  class="btn btn-outline-success"
-  [disabled]="buttonDisabled2"
-  (click)="onClick(true)">
-  Avanzar
+  <button class="btn btn-outline-success" [disabled]="buttonDisabled2" (click)="onClick(true)">
+    Avanzar
   </button>
   <notifier-container></notifier-container>
 </body>
+
 </html>

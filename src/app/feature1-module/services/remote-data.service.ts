@@ -25,10 +25,10 @@ export class RemoteDataService {
     console.log(id);
     return this.httpClient.delete<Response>(this.URL + '/' + id);
   }
-  createUserData(user: User, id) {
+  createUserData(user: User) {
     this.log.log('Iniciando petición http');
     // console.log(id);
-    return this.httpClient.post<Response>(this.URL + '/' + id, user);
+    return this.httpClient.post<Response>(this.URL, user);
   }
   editUserData(id) {
     this.log.log('Iniciando petición http');
