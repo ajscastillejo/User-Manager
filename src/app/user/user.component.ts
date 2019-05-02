@@ -1,12 +1,9 @@
-import { Button } from "protractor";
-import { Component, DoCheck, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators
 } from "@angular/forms";
-import { interval } from "rxjs";
 import { LoggerService } from "../services/logger.service";
 import { NotifierService } from "angular-notifier";
 import { Opcion } from "../models/Opcion";
